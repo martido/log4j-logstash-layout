@@ -1,0 +1,24 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  
+  ext.versions = [
+    commons_lang:           "3.3.2",
+    log4j:                  "1.2.17",
+  ]
+  
+  compile "org.apache.commons:commons-lang3:${versions.commons_lang}"
+  compile "log4j:log4j:${versions.log4j}"
+  
+}
+
+task createWrapper(type: Wrapper) {
+  gradleVersion = '1.11'
+}
