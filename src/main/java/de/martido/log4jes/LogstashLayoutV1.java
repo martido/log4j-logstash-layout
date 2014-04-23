@@ -52,6 +52,9 @@ public class LogstashLayoutV1 extends Layout {
   private static final int BUF_SIZE = 256;
   private static final int BUF_MAX_CAPACITY = 1024;
 
+  // Options
+  private boolean includeLocationInfo = false;
+
   /**
    * Output buffer to append to when format() is invoked.
    * <p>
@@ -87,7 +90,9 @@ public class LogstashLayoutV1 extends Layout {
     this.fields.put("message", event.getRenderedMessage());
     this.fields.put("logger", event.getLoggerName());
 
-    this.addLocationInformation(event);
+    if (this.isIncludeLocationInfo()) {
+      this.addLocationInformation(event);
+    }
     this.addThrowableInformation(event);
 
     if (this.buf.capacity() > BUF_MAX_CAPACITY) {
@@ -104,6 +109,14 @@ public class LogstashLayoutV1 extends Layout {
   @Override
   public boolean ignoresThrowable() {
     return false;
+  }
+
+  public boolean isIncludeLocationInfo() {
+    return this.includeLocationInfo;
+  }
+
+  public void setIncludeLocationInfo(boolean includeLocationInfo) {
+    this.includeLocationInfo = includeLocationInfo;
   }
 
   private void addLocationInformation(LoggingEvent event) {
