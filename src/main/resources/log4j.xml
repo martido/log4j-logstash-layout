@@ -13,11 +13,6 @@
     </layout>
   </appender>
   
-  <appender name="file" class="org.apache.log4j.FileAppender">
-    <param name="file" value="logs/log4jes.log" />
-    <layout class="de.martido.log4jes.LogstashLayoutV1" />
-  </appender>
-  
   <!-- #################### -->
   <!-- Applications loggers -->
   <!-- #################### -->
@@ -29,7 +24,6 @@
     <priority value="INFO" />
     <appender-ref ref="console" />
     <appender-ref ref="consoleWithLoc" />
-    <appender-ref ref="file" />
   </root>
 
 </log4j:configuration>
